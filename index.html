@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>RIFT EVENT / DJ — Questionnaire des mariés</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=IBM+Plex+Mono:wght@400&display=swap">
+<style>
+:root{
+  --bg:#fff;--ink:#000;--mute:#6a6a6a;--line:#d8d8d8;--soft:#f3f3f3;
+  --panel:rgba(255,255,255,.92);
+  --sky:linear-gradient(180deg,#2b1b5a 0%,#7a2a7e 28%,#d9487c 55%,#ff8a4c 80%,#ffd27a 100%);
+  --sans:'Inter',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d0d0d;--ink:#f2f2f2;--mute:#9a9a9a;--line:#2c2c2c;--soft:#1a1a1a;--panel:rgba(13,13,13,.88);--sky:linear-gradient(180deg,#0e0a26 0%,#3a1a5e 30%,#8a2f6a 58%,#d9633f 82%,#f2a65a 100%)}}
+:root[data-theme="dark"]{--bg:#0d0d0d;--ink:#f2f2f2;--mute:#9a9a9a;--line:#2c2c2c;--soft:#1a1a1a;--panel:rgba(13,13,13,.88);--sky:linear-gradient(180deg,#0e0a26 0%,#3a1a5e 30%,#8a2f6a 58%,#d9633f 82%,#f2a65a 100%)}
+html{scroll-padding-top:60px}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:flex;flex-direction:column;background:var(--sky) fixed;color:var(--ink);font:400 16px/1.55 var(--sans);-webkit-font-smoothing:antialiased}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+h1,h2{outline:none}
+main{flex:1;display:flex;flex-direction:column;justify-content:center}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
+
+@keyframes flow{to{background-position:300% 0}}
+
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--panel);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:12px clamp(16px,3vw,40px)}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit;font-size:15px;letter-spacing:.04em}
+.ctl button{font:400 12px/1 var(--mono);background:transparent;color:inherit;border:1px solid var(--line);padding:9px 11px;cursor:pointer}
+.ctl button:hover{border-color:var(--ink)}
+
+.cap{background:var(--panel);font:400 12px/1.4 var(--mono);color:var(--mute);padding:10px clamp(16px,3vw,40px);display:flex;justify-content:space-between;gap:16px}
+.prog{height:4px;background:var(--line)}
+.prog i{display:block;height:4px;background:linear-gradient(90deg,#ed1c24,#f7941d,#ffe600,#4cb848,#00a8ea,#7164ac);transition:width .4s ease}
+
+.hero,.formula{display:block;max-width:760px;width:calc(100% - 24px);margin:32px auto;background:var(--panel);border:1px solid var(--line);border-radius:20px}
+.hero .tx{align-items:center;text-align:center}
+.tx{padding:clamp(28px,5vw,72px) clamp(16px,4vw,64px);display:flex;flex-direction:column;justify-content:center;gap:20px}
+.hero h1{margin:0;font-weight:300;font-size:clamp(34px,4.8vw,68px);line-height:1.04;letter-spacing:-.025em}
+.hero p,.formula p{margin:0;max-width:48ch}
+.m,.lead{color:var(--mute)}
+.formula h2{margin:0;font-weight:400;font-size:clamp(24px,3vw,40px);letter-spacing:-.02em;line-height:1.12;text-transform:uppercase}
+.tag{font:400 12px var(--mono);color:var(--mute)}
+
+.f{display:block;margin:0}
+.f>span,.lbl{display:block;font:400 12px/1.4 var(--mono);color:var(--mute);margin-bottom:8px}
+input,textarea{width:100%;font:400 16px/1.5 var(--sans);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:0;padding:13px 14px}
+input:hover,textarea:hover{border-color:var(--mute)}
+input:focus-visible,textarea:focus-visible{border-color:var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips button{font:400 14px/1.2 var(--sans);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:0;padding:10px 14px;cursor:pointer}
+.chips button:hover{border-color:var(--ink)}
+.chips button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.cta{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:4px}
+.btn{display:inline-block;border:1px solid var(--ink);padding:13px 26px;text-decoration:none;font:400 14px var(--sans);background:transparent;color:var(--ink);cursor:pointer;border-radius:0}
+.btn.fill{background:var(--ink);color:var(--bg)}
+.btn:hover,.btn.fill:hover{background:linear-gradient(100deg,#e8402a,#f28c1c,#f5d90a,#3cb54a,#17b9e8,#8a63d2,#e8402a) 0 0/300% 100%;color:#000;animation:flow 2.4s linear infinite}
+ul.inc{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+ul.inc li{padding:11px 0;border-bottom:1px solid var(--line);font-size:15px;display:grid;grid-template-columns:minmax(0,36%) minmax(0,1fr);gap:16px}
+ul.inc li b{font:400 12px var(--mono);color:var(--mute);padding-top:3px}
+ul.inc li span{white-space:pre-line;overflow-wrap:anywhere}
+.st{font:400 12px var(--mono);color:var(--mute)}
+footer{background:var(--panel);padding:20px clamp(16px,3vw,40px) 28px;font:400 12px var(--mono);color:var(--mute);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+@media (prefers-reduced-motion:reduce){.btn:hover,.btn.fill:hover{animation:none}.prog i{transition:none}}
+</style>
+</head>
+<body>
+<header>
+  <a class="logo" href="#top"><span>RIFT EVENT / DJ</span></a>
+  <div class="ctl"><button id="theme" type="button">Sombre</button></div>
+</header>
+<div class="cap"><span>RIFT EVENT / DJ</span><span id="capn">Questionnaire des mariés</span></div>
+<div class="prog"><i id="pbar" style="width:0%"></i></div>
+<main id="app"></main>
+<footer><span>© 2026 RIFT EVENT / DJ</span><span>Instagram · Facebook · SoundCloud</span></footer>
+<script>
+const STEPS = [
+  {t:"Vous êtes…", d:"Pour que votre DJ sache pour qui il joue.", f:[
+    {k:"noms", type:"text", l:"Vos prénoms", p:"Camille et Julien"},
+    {k:"date", type:"text", l:"Date et lieu du mariage", p:"12 juin, Saint-Malo"}]},
+  {t:"L’ambiance de la soirée, plutôt…", f:[
+    {k:"ambiance", type:"one", o:["Chic et élégante","Festive dès le début","Chaleureuse et intime","Un mélange de tout ça"]}]},
+  {t:"Sur la piste, vous rêvez de…", d:"Plusieurs réponses possibles.", f:[
+    {k:"piste", type:"many", o:["Rock’n’roll des années 50","Twist et yéyé des années 60","Tubes des années 70","Disco","Funk","Tubes des années 80","Italo disco","Tubes des années 90","Eurodance","Tubes des années 2000","Tubes des années 2010","Pop actuelle","Pop rock","Rock classique","Hard rock","Rock français","Punk et new wave","Indie et rock alternatif","Variété française","Chanson française à reprendre en chœur","Rap français","Rap américain","Hip-hop old school","R&B","Soul et Motown","Reggae","Dancehall et afrobeats","Reggaeton","Salsa et bachata","Musiques latines","Zouk et musiques antillaises","Raï et musiques du Maghreb","Musiques d’Afrique","Bollywood","Musique bretonne et celtique","Musette et bal populaire","Country et line dance","Swing et lindy hop","Électro","House","Techno mélodique","Dance et electro-pop","Remix et mashups","Musiques de films et séries","Génériques de dessins animés","Slows","Hymnes de stades et chants collectifs","Je laisse le DJ choisir"]},
+    {k:"piste_autre", type:"text", l:"Autre (précisez)", p:"Un style, un artiste, une ambiance…"}]},
+  {t:"Les moments clés", d:"Un titre ou un artiste par moment. Laissez vide si vous hésitez.", f:[
+    {k:"entree", type:"text", l:"Entrée des mariés"},
+    {k:"bal", type:"text", l:"Ouverture de bal"},
+    {k:"gateau", type:"text", l:"Gâteau ou dessert"},
+    {k:"dernier", type:"text", l:"Dernier morceau de la soirée"},
+    {k:"moment_autre", type:"text", l:"Autre moment (précisez le moment et le titre)", p:"Danse des parents, surprise des témoins…"}]},
+  {t:"Vos titres incontournables", d:"Un par ligne, avec l’artiste. Le DJ fera de son mieux pour tous les placer.", f:[
+    {k:"must", type:"area", p:"Artiste – Titre"}]},
+  {t:"Et ceux à ne surtout pas jouer", d:"Un par ligne. Une chanson trop entendue, un souvenir gênant…", f:[
+    {k:"ban", type:"area"}]},
+  {t:"Quelques détails", f:[
+    {k:"slows", type:"one", l:"Des slows ?", o:["Oui, plusieurs","Un ou deux","Non merci"]},
+    {k:"choeur", type:"one", l:"Des chansons à chanter tous ensemble ?", o:["Oui, à fond","Un peu","Pas vraiment"]},
+    {k:"autres", type:"area", l:"Autre chose à dire au DJ ?"}]}
+];
+const LABELS = {noms:"Mariés", date:"Date et lieu", ambiance:"Ambiance", piste:"Sur la piste", piste_autre:"Sur la piste (autre)", entree:"Entrée des mariés", bal:"Ouverture de bal", gateau:"Gâteau ou dessert", dernier:"Dernier morceau", moment_autre:"Autre moment clé", must:"Titres incontournables", ban:"Titres interdits", slows:"Slows", choeur:"Chansons à chanter en chœur", autres:"Autres remarques"};
+const app = document.getElementById("app"), capn = document.getElementById("capn"), pbar = document.getElementById("pbar");
+const MAIL = "enzo.morelaudio@gmail.com";
+let i = 0, A = {};
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function cap(t, p){ capn.textContent = t; pbar.style.width = p + "%"; }
+function focusTop(h2){ if (h2) h2.focus({preventScroll:true}); window.scrollTo(0, 0); }
+
+function intro(){
+  cap("Questionnaire des mariés", 0);
+  app.innerHTML = `<section class="hero" id="top">
+    <div class="tx">
+      <h1 tabindex="-1">Dites-moi ce que vous voulez entendre.</h1>
+      <p>${STEPS.length} étapes pour me raconter votre soirée : styles, moments clés, titres incontournables et titres à éviter. Comptez cinq minutes.</p>
+      <p class="m">À la fin, vous obtenez une fiche à m’envoyer. Je prépare la musique de votre journée à partir de vos réponses.</p>
+      <button type="button" class="btn fill" id="go">Commencer</button>
+    </div></section>`;
+  document.getElementById("go").onclick = () => { i = 0; A = {}; step(); };
+}
+function field(f){
+  const lab = f.l ? `<span>${f.l}</span>` : "";
+  if (f.type === "text") return `<label class="f">${lab}<input type="text" data-k="${f.k}" placeholder="${esc(f.p || "")}" value="${esc(A[f.k])}"></label>`;
+  if (f.type === "area") return `<label class="f">${lab}<textarea rows="5" data-k="${f.k}" placeholder="${esc(f.p || "")}">${esc(A[f.k])}</textarea></label>`;
+  const cur = A[f.k] || (f.type === "many" ? [] : "");
+  const chips = f.o.map(o => `<button type="button" data-k="${f.k}" data-o="${esc(o)}" aria-pressed="${f.type === "many" ? cur.includes(o) : cur === o}">${o}</button>`).join("");
+  return `<div class="f">${f.l ? `<div class="lbl">${f.l}</div>` : ""}<div class="chips" data-type="${f.type}">${chips}</div></div>`;
+}
+function step(){
+  const s = STEPS[i], n = STEPS.length, last = i === n - 1;
+  cap(`Étape ${i + 1} sur ${n}`, (i + 1) / n * 100);
+  app.innerHTML = `<section class="formula">
+    <div class="tx">
+      <span class="tag">Étape ${i + 1} sur ${n}</span>
+      <h2 tabindex="-1">${s.t}</h2>
+      ${s.d ? `<p class="lead">${s.d}</p>` : ""}
+      ${s.f.map(field).join("")}
+      <div class="cta">${i ? `<button type="button" class="btn" id="back">Retour</button>` : ""}<button type="button" class="btn fill" id="next">${last ? "Voir ma fiche" : "Suivant"}</button></div>
+    </div></section>`;
+  app.querySelectorAll("input,textarea").forEach(el => el.oninput = () => A[el.dataset.k] = el.value);
+  app.querySelectorAll(".chips button").forEach(b => b.onclick = () => {
+    const k = b.dataset.k, o = b.dataset.o;
+    if (b.parentElement.dataset.type === "many") {
+      const set = new Set(A[k] || []);
+      set.has(o) ? set.delete(o) : set.add(o);
+      A[k] = [...set];
+      b.setAttribute("aria-pressed", set.has(o));
+    } else {
+      A[k] = o;
+      b.parentElement.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x === b));
+    }
+  });
+  const back = document.getElementById("back");
+  if (back) back.onclick = () => { i--; step(); };
+  document.getElementById("next").onclick = () => { if (last) result(); else { i++; step(); } };
+  focusTop(app.querySelector("h2"));
+}
+function rows(){
+  return Object.keys(LABELS).map(k => {
+    let v = A[k];
+    if (Array.isArray(v)) v = v.join(", ");
+    v = (v || "").trim();
+    return v ? [LABELS[k], v] : null;
+  }).filter(Boolean);
+}
+function sheet(){
+  return `FICHE MUSIQUE – ${A.noms || "Mariage"}\n\n` + rows().map(([l, v]) => v.includes("\n") ? `${l} :\n${v}` : `${l} : ${v}`).join("\n");
+}
+async function copy(t){
+  try { await navigator.clipboard.writeText(t); return true; }
+  catch (e) {
+    try { const x = document.createElement("textarea"); x.value = t; document.body.appendChild(x); x.select(); const ok = document.execCommand("copy"); x.remove(); return ok; }
+    catch (e2) { return false; }
+  }
+}
+function result(){
+  cap("Votre fiche", 100);
+  const text = sheet();
+  const href = `mailto:${MAIL}?subject=${encodeURIComponent("Fiche musique – " + (A.noms || "Mariage"))}&body=${encodeURIComponent(text)}`;
+  app.innerHTML = `<section class="formula">
+    <div class="tx">
+      <span class="tag">Terminé</span>
+      <h2 tabindex="-1">Votre fiche est prête</h2>
+      <p class="lead">Envoyez-la-moi par e-mail ou copiez-la pour me l’envoyer par message.</p>
+      <ul class="inc">${rows().map(([l, v]) => `<li><b>${esc(l)}</b><span>${esc(v)}</span></li>`).join("")}</ul>
+      <div class="cta"><a class="btn fill" href="${href}">Envoyer par e-mail</a><button type="button" class="btn" id="copy">Copier la fiche</button><button type="button" class="btn" id="edit">Modifier</button><span class="st" id="st" role="status"></span></div>
+    </div></section>`;
+  document.getElementById("edit").onclick = () => { i = 0; step(); };
+  document.getElementById("copy").onclick = async () => {
+    document.getElementById("st").textContent = (await copy(text)) ? "Copié." : "Copie impossible : utilisez l’e-mail.";
+  };
+  focusTop(app.querySelector("h2"));
+}
+
+const root = document.documentElement, tb = document.getElementById("theme");
+const eff = () => root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+function upd(){ const d = eff() === "dark"; tb.textContent = d ? "Clair" : "Sombre"; tb.setAttribute("aria-label", d ? "Passer en mode clair" : "Passer en mode sombre"); }
+tb.onclick = () => { const t = eff() === "dark" ? "light" : "dark"; root.setAttribute("data-theme", t); upd(); try { localStorage.setItem("theme", t); } catch (e) {} };
+try { const st = localStorage.getItem("theme"); if (st === "light" || st === "dark") root.setAttribute("data-theme", st); } catch (e) {}
+upd();
+intro();
+</script>
+</body>
+</html>
